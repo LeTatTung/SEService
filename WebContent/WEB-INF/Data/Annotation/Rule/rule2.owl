@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY swrl  "http://www.w3.org/2003/11/swrl#" >
+  <!ENTITY rule2 "http://www.hut.edu.vn/ontology/rule2#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">  
+  <!ENTITY sourcecode "http://hut.edu.vn/ontology/sourcecode#" >
+  <!ENTITY document "http://hut.edu.vn/ontology/document#" >
+  <!ENTITY ruleml  "http://www.w3.org/2003/11/ruleml#" >
+]>
+<rdf:RDF xml:base="http://www.hut.edu.vn/ontology/rule2#" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:swrl="http://www.w3.org/2003/11/swrl#" 
+		xmlns:ruleml="http://www.w3.org/2003/11/ruleml#">
+
+	
+	<!-- Neu class co full path la fullPath thi field, method, hoac cac class trong no cung co full path la s-->
+
+	<swrl:Variable rdf:about="#class"/>
+	<swrl:Variable rdf:about="#classIn"/>
+	<swrl:Variable rdf:about="#method"/>
+	<swrl:Variable rdf:about="#field"/>
+	<swrl:Variable rdf:about="#fullPath"/>
+
+	<swrl:Imp rdf:about="#hasFullPathMethodInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#method" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Class"/>
+				<swrl:argument1 rdf:resource="#class"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Method"/>
+				<swrl:argument1 rdf:resource="#method"/>
+			</swrl:ClassAtom>
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#class" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasMethod"/>
+				<swrl:argument1 rdf:resource="#class"/>
+				<swrl:argument2 rdf:resource="#method"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+
+	<!-- Tuong tu voi field-->
+	<swrl:Imp rdf:about="#hasFullPathFieldInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#field" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Class"/>
+				<swrl:argument1 rdf:resource="#class"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Field"/>
+				<swrl:argument1 rdf:resource="#field"/>
+			</swrl:ClassAtom>
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#class" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasField"/>
+				<swrl:argument1 rdf:resource="#class"/>
+				<swrl:argument2 rdf:resource="#field"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+	<!-- Tuong tu voi class-->
+	<swrl:Imp rdf:about="#hasFullPathClassInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#classIn" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Class"/>
+				<swrl:argument1 rdf:resource="#class"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Class"/>
+				<swrl:argument1 rdf:resource="#classIn"/>
+			</swrl:ClassAtom>
+			<swrl:DatavaluedPropertyAtom> 
+			      <swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasFullPath"/> 
+			      <swrl:argument1 rdf:resource="#class" />
+			      <swrl:argument2 rdf:resource="#fullPath" />
+    			</swrl:DatavaluedPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasClass"/>
+				<swrl:argument1 rdf:resource="#class"/>
+				<swrl:argument2 rdf:resource="#classIn"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+</rdf:RDF>

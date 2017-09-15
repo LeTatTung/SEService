@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY swrl  "http://www.w3.org/2003/11/swrl#" >
+  <!ENTITY rule3 "http://www.hut.edu.vn/ontology/rule3#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">  
+  <!ENTITY sourcecode "http://hut.edu.vn/ontology/sourcecode#" >
+  <!ENTITY document "http://hut.edu.vn/ontology/document#" >
+  <!ENTITY ruleml  "http://www.w3.org/2003/11/ruleml#" >
+]>
+<rdf:RDF xml:base="http://www.hut.edu.vn/ontology/rule3#" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:swrl="http://www.w3.org/2003/11/swrl#" 
+		xmlns:ruleml="http://www.w3.org/2003/11/ruleml#">
+
+	
+	<!-- Neu package co sourcefile, sourcefile co class, thi package co class-->
+
+	<swrl:Variable rdf:about="#class"/>
+	<swrl:Variable rdf:about="#interface"/>
+	<swrl:Variable rdf:about="#sourceFile"/>
+	<swrl:Variable rdf:about="#package"/>
+
+	<swrl:Imp rdf:about="#hasClassInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasClass"/>
+				<swrl:argument1 rdf:resource="#package"/>
+				<swrl:argument2 rdf:resource="#class"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#SourceFile"/>
+				<swrl:argument1 rdf:resource="#sourceFile"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Package"/>
+				<swrl:argument1 rdf:resource="#package"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Class"/>
+				<swrl:argument1 rdf:resource="#class"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasJavaSourceFile"/>
+				<swrl:argument1 rdf:resource="#package"/>
+				<swrl:argument2 rdf:resource="#sourceFile"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasClass"/>
+				<swrl:argument1 rdf:resource="#sourceFile"/>
+				<swrl:argument2 rdf:resource="#class"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+	<!-- Neu package co sourcefile, sourcefile co interface, thi package co interface-->
+
+	<swrl:Imp rdf:about="#hasInterfaceInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasInterface"/>
+				<swrl:argument1 rdf:resource="#package"/>
+				<swrl:argument2 rdf:resource="#interface"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#SourceFile"/>
+				<swrl:argument1 rdf:resource="#sourceFile"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Package"/>
+				<swrl:argument1 rdf:resource="#package"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Interface"/>
+				<swrl:argument1 rdf:resource="#interface"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasJavaSourceFile"/>
+				<swrl:argument1 rdf:resource="#package"/>
+				<swrl:argument2 rdf:resource="#sourceFile"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#hasInterface"/>
+				<swrl:argument1 rdf:resource="#sourceFile"/>
+				<swrl:argument2 rdf:resource="#interface"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+</rdf:RDF>

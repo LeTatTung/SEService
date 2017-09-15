@@ -1,0 +1,3501 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY document "http://hut.edu.vn/ontology/document#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY sourcecode "http://hut.edu.vn/ontology/sourcecode#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://hut.edu.vn/ontology/document#"
+     xml:base="http://hut.edu.vn/ontology/document"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:sourcecode="http://hut.edu.vn/ontology/sourcecode#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:document="http://hut.edu.vn/ontology/document#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#">
+    <owl:Ontology rdf:about="">
+        <rdfs:label
+            >Software Engineering Concepts</rdfs:label>
+        <rdfs:label
+            >Document Ontology</rdfs:label>
+        <owl:versionInfo>0.2</owl:versionInfo>
+        <owl:versionInfo>0.1</owl:versionInfo>
+        <rdfs:comment
+            >An ontology to represent concepts in software engineering, such as object-oriented components and their relationships to each other and external documentation.</rdfs:comment>
+        <rdfs:comment
+            >Representaton
+ an ontology that discribles a document</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&owl;versionInfo"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#authorOf -->
+
+    <owl:ObjectProperty rdf:about="#authorOf">
+        <rdfs:label>hasBook</rdfs:label>
+        <rdfs:range rdf:resource="#Document"/>
+        <rdfs:domain rdf:resource="#Person"/>
+        <owl:inverseOf rdf:resource="#hasAuthor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeChangeOf -->
+
+    <owl:ObjectProperty rdf:about="#codeChangeOf"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeChangedBy -->
+
+    <owl:ObjectProperty rdf:about="#codeChangedBy">
+        <rdfs:domain rdf:resource="#CodeChange"/>
+        <rdfs:range rdf:resource="#Developer"/>
+        <owl:inverseOf rdf:resource="#executeCodeChange"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeDesignedInDoc -->
+
+    <owl:ObjectProperty rdf:about="#codeDesignedInDoc">
+        <rdfs:subPropertyOf rdf:resource="#codeRelatedToDoc"/>
+        <owl:inverseOf rdf:resource="#docDesignForCode"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeDevelopedBy -->
+
+    <owl:ObjectProperty rdf:about="#codeDevelopedBy">
+        <rdfs:range rdf:resource="#Developer"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeIsIllustratedInImage -->
+
+    <owl:ObjectProperty rdf:about="#codeIsIllustratedInImage">
+        <rdfs:range rdf:resource="#Image"/>
+        <rdfs:subPropertyOf rdf:resource="#codeRelatedToDoc"/>
+        <owl:inverseOf rdf:resource="#imageIllustrateForCode"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeRelatedToDoc -->
+
+    <owl:ObjectProperty rdf:about="#codeRelatedToDoc">
+        <owl:inverseOf rdf:resource="#docRelatedToCode"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#developerCodeRequirement -->
+
+    <owl:ObjectProperty rdf:about="#developerCodeRequirement"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#docDescribeRequirement -->
+
+    <owl:ObjectProperty rdf:about="#docDescribeRequirement">
+        <owl:inverseOf rdf:resource="#requirementDescribedInDoc"/>
+        <rdfs:range rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#docDesignForCode -->
+
+    <owl:ObjectProperty rdf:about="#docDesignForCode">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#docRelatedToCode -->
+
+    <owl:ObjectProperty rdf:about="#docRelatedToCode">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#documentElementOf -->
+
+    <owl:ObjectProperty rdf:about="#documentElementOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#executeCodeChange -->
+
+    <owl:ObjectProperty rdf:about="#executeCodeChange"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasAuthor -->
+
+    <owl:ObjectProperty rdf:about="#hasAuthor">
+        <rdfs:label>hasAuthor</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasCodeChange -->
+
+    <owl:ObjectProperty rdf:about="#hasCodeChange">
+        <rdfs:range rdf:resource="#CodeChange"/>
+        <owl:inverseOf rdf:resource="#codeChangeOf"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasDocumentElement -->
+
+    <owl:ObjectProperty rdf:about="#hasDocumentElement">
+        <rdfs:range rdf:resource="#DocumentElement"/>
+        <owl:inverseOf rdf:resource="#documentElementOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasFormat -->
+
+    <owl:ObjectProperty rdf:about="#hasFormat">
+        <rdfs:label>hasFormat</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="#FontFormat"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasImage -->
+
+    <owl:ObjectProperty rdf:about="#hasImage">
+        <rdfs:range rdf:resource="#Image"/>
+        <rdfs:subPropertyOf rdf:resource="#hasDocumentElement"/>
+        <owl:inverseOf rdf:resource="#imageOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasLink -->
+
+    <owl:ObjectProperty rdf:about="#hasLink">
+        <rdfs:label>homepage</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="#Link"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasMember -->
+
+    <owl:ObjectProperty rdf:about="#hasMember">
+        <rdfs:label>includesPerson</rdfs:label>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Group"/>
+                    <rdf:Description rdf:about="#Organization"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasParagraph -->
+
+    <owl:ObjectProperty rdf:about="#hasParagraph">
+        <rdfs:range rdf:resource="#Paragraph"/>
+        <rdfs:subPropertyOf rdf:resource="#hasDocumentElement"/>
+        <owl:inverseOf rdf:resource="#paragraphOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasReference -->
+
+    <owl:ObjectProperty rdf:about="#hasReference">
+        <rdfs:label>hasReference</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Link"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasSection -->
+
+    <owl:ObjectProperty rdf:about="#hasSection">
+        <rdfs:range rdf:resource="#Section"/>
+        <rdfs:subPropertyOf rdf:resource="#hasDocumentElement"/>
+        <owl:inverseOf rdf:resource="#sectionOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasSkillInTopic -->
+
+    <owl:ObjectProperty rdf:about="#hasSkillInTopic">
+        <rdfs:domain rdf:resource="#Developer"/>
+        <rdfs:range rdf:resource="#Topic"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasTopic -->
+
+    <owl:ObjectProperty rdf:about="#hasTopic">
+        <rdfs:range rdf:resource="#Topic"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                    <rdf:Description rdf:about="#ProjectTeam"/>
+                    <rdf:Description rdf:about="&sourcecode;SoftwareComponent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasWorkspace -->
+
+    <owl:ObjectProperty rdf:about="#hasWorkspace">
+        <rdfs:domain rdf:resource="#ProjectTeam"/>
+        <owl:inverseOf rdf:resource="#workspaceOf"/>
+        <rdfs:range rdf:resource="&sourcecode;Workspace"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#imageIllustrateForCode -->
+
+    <owl:ObjectProperty rdf:about="#imageIllustrateForCode"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#imageOf -->
+
+    <owl:ObjectProperty rdf:about="#imageOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#includeSubTeam -->
+
+    <owl:ObjectProperty rdf:about="#includeSubTeam">
+        <rdfs:domain rdf:resource="#ProjectTeam"/>
+        <owl:inverseOf rdf:resource="#subTeamOfProjectTeam"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#DesignerTeam"/>
+                    <rdf:Description rdf:about="#DeveloperTeam"/>
+                    <rdf:Description rdf:about="#TesterTeam"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#leadTeam -->
+
+    <owl:ObjectProperty rdf:about="#leadTeam">
+        <rdfs:domain rdf:resource="#TeamLeader"/>
+        <owl:inverseOf rdf:resource="#leadedBy"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#DesignerTeam"/>
+                    <rdf:Description rdf:about="#DeveloperTeam"/>
+                    <rdf:Description rdf:about="#TesterTeam"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#leadedBy -->
+
+    <owl:ObjectProperty rdf:about="#leadedBy">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#DesignerTeam"/>
+                    <rdf:Description rdf:about="#DeveloperTeam"/>
+                    <rdf:Description rdf:about="#TesterTeam"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#manageProjectTeam -->
+
+    <owl:ObjectProperty rdf:about="#manageProjectTeam">
+        <rdfs:domain rdf:resource="#ProjectManager"/>
+        <rdfs:range rdf:resource="#ProjectTeam"/>
+        <owl:inverseOf rdf:resource="#managedBy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#managedBy -->
+
+    <owl:ObjectProperty rdf:about="#managedBy"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#memberOf -->
+
+    <owl:ObjectProperty rdf:about="#memberOf">
+        <rdfs:label>isMemberOf</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <owl:inverseOf rdf:resource="#hasMember"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Group"/>
+                    <rdf:Description rdf:about="#Organization"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#paragraphOf -->
+
+    <owl:ObjectProperty rdf:about="#paragraphOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#projectTeamHasRequirement -->
+
+    <owl:ObjectProperty rdf:about="#projectTeamHasRequirement"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#requirementCodedByDeveloper -->
+
+    <owl:ObjectProperty rdf:about="#requirementCodedByDeveloper">
+        <rdfs:range rdf:resource="#Developer"/>
+        <owl:inverseOf rdf:resource="#developerCodeRequirement"/>
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#requirementDescribedInDoc -->
+
+    <owl:ObjectProperty rdf:about="#requirementDescribedInDoc">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#requirementOfProjectTeam -->
+
+    <owl:ObjectProperty rdf:about="#requirementOfProjectTeam">
+        <rdfs:range rdf:resource="#ProjectTeam"/>
+        <owl:inverseOf rdf:resource="#projectTeamHasRequirement"/>
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#requirementTestedIn -->
+
+    <owl:ObjectProperty rdf:about="#requirementTestedIn">
+        <owl:inverseOf rdf:resource="#testForRequirement"/>
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:range rdf:resource="&sourcecode;Test"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#sectionOf -->
+
+    <owl:ObjectProperty rdf:about="#sectionOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#seeAlso -->
+
+    <owl:ObjectProperty rdf:about="#seeAlso">
+        <rdfs:label>seeAlso</rdfs:label>
+        <rdfs:domain rdf:resource="#DocumentElement"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                    <rdf:Description rdf:about="#Link"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#subTeamOfProjectTeam -->
+
+    <owl:ObjectProperty rdf:about="#subTeamOfProjectTeam">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#DesignerTeam"/>
+                    <rdf:Description rdf:about="#DeveloperTeam"/>
+                    <rdf:Description rdf:about="#TesterTeam"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#testForRequirement -->
+
+    <owl:ObjectProperty rdf:about="#testForRequirement"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#testIsExecutedByTester -->
+
+    <owl:ObjectProperty rdf:about="#testIsExecutedByTester">
+        <rdfs:range rdf:resource="#Tester"/>
+        <owl:inverseOf rdf:resource="#testerExecuteTest"/>
+        <rdfs:domain rdf:resource="&sourcecode;Test"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#testerExecuteTest -->
+
+    <owl:ObjectProperty rdf:about="#testerExecuteTest"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#topicOf -->
+
+    <owl:ObjectProperty rdf:about="#topicOf">
+        <owl:inverseOf rdf:resource="#hasTopic"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#DocumentElement"/>
+                    <rdf:Description rdf:about="#ProjectTeam"/>
+                    <rdf:Description rdf:about="&sourcecode;SoftwareComponent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#workspaceOf -->
+
+    <owl:ObjectProperty rdf:about="#workspaceOf"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#classIsExtendedBy -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;classIsExtendedBy">
+        <rdfs:label>extended by</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO super class and another class which extends it.</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;extendsClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#classOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;classOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                    <rdf:Description rdf:about="&sourcecode;SourceFile"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#codeInstallRequirement -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;codeInstallRequirement">
+        <rdfs:range rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <owl:inverseOf rdf:resource="&sourcecode;requirementInstalledInCode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#commentOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;commentOf">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                    <rdf:Description rdf:about="&sourcecode;Parameter"/>
+                    <rdf:Description rdf:about="&sourcecode;Variable"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#constructorOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;constructorOf">
+        <rdfs:label>Constructor of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an object-oriented Constructor and an OO Class that contains it.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Class"/>
+        <rdfs:domain rdf:resource="&sourcecode;Constructor"/>
+        <owl:inverseOf rdf:resource="&sourcecode;hasConstructor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#extendsClass -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;extendsClass">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:label>extends</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >Defines the relationship between an OO Class which extends another and the OO CLass which it extends.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Class"/>
+        <rdfs:range rdf:resource="&sourcecode;Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#fieldOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;fieldOf"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#folderSourceCodeOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;folderSourceCodeOf"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasClass -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasClass">
+        <rdfs:range rdf:resource="&sourcecode;Class"/>
+        <owl:inverseOf rdf:resource="&sourcecode;classOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                    <rdf:Description rdf:about="&sourcecode;SourceFile"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasComment -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasComment">
+        <rdfs:label>hasComment</rdfs:label>
+        <rdfs:range rdf:resource="&sourcecode;Comment"/>
+        <owl:inverseOf rdf:resource="&sourcecode;commentOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                    <rdf:Description rdf:about="&sourcecode;Parameter"/>
+                    <rdf:Description rdf:about="&sourcecode;Variable"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasConstructor -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasConstructor">
+        <rdfs:label>has Constructor</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an Object-Oriented Class and the constructors that it contains.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasField -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasField">
+        <rdfs:domain rdf:resource="&sourcecode;Class"/>
+        <rdfs:range rdf:resource="&sourcecode;Field"/>
+        <owl:inverseOf rdf:resource="&sourcecode;fieldOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasFolderSourceCode -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasFolderSourceCode">
+        <rdfs:range rdf:resource="&sourcecode;FolderSourceCode"/>
+        <rdfs:domain rdf:resource="&sourcecode;Project"/>
+        <owl:inverseOf rdf:resource="&sourcecode;folderSourceCodeOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasInterface -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasInterface">
+        <rdfs:range rdf:resource="&sourcecode;Interface"/>
+        <owl:inverseOf rdf:resource="&sourcecode;interfaceOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasJavaSourceFile -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasJavaSourceFile">
+        <rdfs:label>hasSource</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;Package"/>
+        <rdfs:range rdf:resource="&sourcecode;SourceFile"/>
+        <owl:inverseOf rdf:resource="&sourcecode;javaSourceFileOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasMethod -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasMethod">
+        <rdfs:label xml:lang="en">has method</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >Defines the relationship between an Object-Oriented Class and the methods that it contains.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Class"/>
+        <rdfs:range rdf:resource="&sourcecode;Method"/>
+        <owl:inverseOf rdf:resource="&sourcecode;methodOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasMethodSignature -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasMethodSignature">
+        <rdfs:label
+            >has method signature</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Interface or Abstract Class and an OO Method Signature.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;MethodSignature"/>
+        <owl:inverseOf rdf:resource="&sourcecode;methodSignatureOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;AbstractClass"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasMetric -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasMetric">
+        <rdfs:label>has metric</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Software Component and a Metric which has been calculated for it.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Metric"/>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <owl:inverseOf rdf:resource="&sourcecode;isMetricOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasModifier -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasModifier">
+        <rdfs:label>hasModifier</rdfs:label>
+        <rdfs:comment
+            >modifier of method, class, ...</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;JavaModifier"/>
+        <owl:inverseOf rdf:resource="&sourcecode;modifierOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Field"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasPackage -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasPackage">
+        <rdfs:label>has package</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Project and a Package which it contains.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Package"/>
+        <owl:inverseOf rdf:resource="&sourcecode;packageOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;FolderSourceCode"/>
+                    <rdf:Description rdf:about="&sourcecode;Layer"/>
+                    <rdf:Description rdf:about="&sourcecode;Library"/>
+                    <rdf:Description rdf:about="&sourcecode;Project"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasParameter -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasParameter">
+        <rdfs:label>hasParameter</rdfs:label>
+        <rdfs:comment
+            >Representation that a method, constructor,... have a parameter</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Parameter"/>
+        <owl:inverseOf rdf:resource="&sourcecode;parameterOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasProject -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasProject">
+        <rdfs:label>hasProject</rdfs:label>
+        <rdfs:comment
+            >Representation that a workspace has a project</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Project"/>
+        <rdfs:domain rdf:resource="&sourcecode;Workspace"/>
+        <owl:inverseOf rdf:resource="&sourcecode;projectOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasResource -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasResource">
+        <rdfs:label>hasResource</rdfs:label>
+        <rdfs:comment
+            >Representation that a something has resource (image, folder...)</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Resource"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Library"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                    <rdf:Description rdf:about="&sourcecode;Project"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasTest -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasTest">
+        <rdfs:label>has test</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Software Component and an associated Test.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:range rdf:resource="&sourcecode;Test"/>
+        <owl:inverseOf rdf:resource="&sourcecode;isTestOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasType -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasType">
+        <rdfs:label>hasType</rdfs:label>
+        <rdfs:comment
+            >Representation a type of method, variable</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Type"/>
+        <owl:inverseOf rdf:resource="&sourcecode;typeOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Field"/>
+                    <rdf:Description rdf:about="&sourcecode;Parameter"/>
+                    <rdf:Description rdf:about="&sourcecode;Variable"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasVariable -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;hasVariable">
+        <rdfs:label>hasVariable</rdfs:label>
+        <rdfs:comment
+            >Representation that something has variable</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Variable"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#implementsInterface -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;implementsInterface">
+        <rdfs:label>implements</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >Defines the relationship between an OO Class and an OO Interface which it extends.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Interface"/>
+        <owl:inverseOf rdf:resource="&sourcecode;interfaceImplementedBy"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#integrationTestIncludeTest -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;integrationTestIncludeTest">
+        <rdfs:domain rdf:resource="&sourcecode;IntegrationTest"/>
+        <rdfs:range rdf:resource="&sourcecode;Test"/>
+        <owl:inverseOf rdf:resource="&sourcecode;testOfIngretationTest"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#interfaceImplementedBy -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;interfaceImplementedBy">
+        <rdfs:label>implemented by</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Interface and an OO Class which implements it.</rdfs:comment>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#interfaceOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;interfaceOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#isMetricOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;isMetricOf">
+        <rdfs:label>is metric of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a Metric and an OO Software Component for which it was calculated.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#isTestOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;isTestOf">
+        <rdfs:label>is test of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a Test and an OO Software Component.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javaSourceFileOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;javaSourceFileOf"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#libraryUsedBy -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;libraryUsedBy">
+        <rdfs:label>usedByProject</rdfs:label>
+        <owl:inverseOf rdf:resource="&sourcecode;usesLibrary"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#methodOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;methodOf">
+        <rdfs:label>method of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a method and the Object-Oriented Class which contains it.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#methodSignatureOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;methodSignatureOf">
+        <rdfs:label
+            >method signature of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Method Signature and a containing OO Interface or Abstract Class.</rdfs:comment>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;AbstractClass"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#methodUsedBy -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;methodUsedBy">
+        <rdfs:label>method used by</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between two OO Methods, from the used Method to the using Method.</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;usesMethod"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#modifierOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;modifierOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Field"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#packageOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;packageOf">
+        <rdfs:label>package of</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between an OO Package and the OO Project which contains it.</rdfs:comment>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;FolderSourceCode"/>
+                    <rdf:Description rdf:about="&sourcecode;Layer"/>
+                    <rdf:Description rdf:about="&sourcecode;Library"/>
+                    <rdf:Description rdf:about="&sourcecode;Project"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#parameterOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;parameterOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#projectOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;projectOf">
+        <rdfs:label>projectOf</rdfs:label>
+        <rdfs:comment
+            >Representation that a project is with in a workspace</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#requirementInstalledInCode -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;requirementInstalledInCode"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#resourceOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;resourceOf">
+        <rdfs:label>resourceOf</rdfs:label>
+        <rdfs:comment
+            >Repersentation that Resource is belong to a object</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;hasResource"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Library"/>
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                    <rdf:Description rdf:about="&sourcecode;Project"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#returnType -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;returnType">
+        <rdfs:label>return</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >Representation the type return of a method or methodsignature</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Type"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#testOfIngretationTest -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;testOfIngretationTest"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#throws -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;throws">
+        <rdfs:label>throws</rdfs:label>
+        <rdfs:comment
+            >Representation that a method or method si
+gnature can throw an exception</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Class"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;MethodSignature"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#typeOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;typeOf">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Field"/>
+                    <rdf:Description rdf:about="&sourcecode;Parameter"/>
+                    <rdf:Description rdf:about="&sourcecode;Variable"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usedByClass -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usedByClass">
+        <rdfs:label>usedByClass</rdfs:label>
+        <rdfs:comment
+            >Define the relationship between two class, a class was used by another class</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Class"/>
+        <rdfs:domain rdf:resource="&sourcecode;Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usedByPackage -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usedByPackage">
+        <rdfs:label>usedByPackage</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;Package"/>
+        <rdfs:range rdf:resource="&sourcecode;Package"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usesClass -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usesClass">
+        <rdfs:label>usesClass</rdfs:label>
+        <rdfs:comment
+            >Define the relationship between two class, a class uses another class</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;usedByClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usesLibrary -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usesLibrary">
+        <rdfs:label>hasLibrary</rdfs:label>
+        <rdfs:range rdf:resource="&sourcecode;Library"/>
+        <rdfs:domain rdf:resource="&sourcecode;Project"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usesMethod -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usesMethod">
+        <rdfs:label>uses method</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between two OO Methods, from the using Method to the used Method.</rdfs:comment>
+        <rdfs:range rdf:resource="&sourcecode;Method"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#usesPackage -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;usesPackage">
+        <rdfs:label>usesPackage</rdfs:label>
+        <rdfs:comment
+            >Define the relationship between two Package, a package uses another package in its code</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;usedByPackage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#variableOf -->
+
+    <owl:ObjectProperty rdf:about="&sourcecode;variableOf">
+        <rdfs:label>variableOf</rdfs:label>
+        <rdfs:comment
+            >Representation that a variable is belong to which</rdfs:comment>
+        <owl:inverseOf rdf:resource="&sourcecode;hasVariable"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Constructor"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#codeChangeAt -->
+
+    <owl:DatatypeProperty rdf:about="#codeChangeAt">
+        <rdfs:domain rdf:resource="#CodeChange"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#documentHasAbstract -->
+
+    <owl:DatatypeProperty rdf:about="#documentHasAbstract">
+        <rdfs:label>abstract</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#documentHasTitle -->
+
+    <owl:DatatypeProperty rdf:about="#documentHasTitle">
+        <rdfs:label>title</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#documentOrElementcreatedAt -->
+
+    <owl:DatatypeProperty rdf:about="#documentOrElementcreatedAt">
+        <rdfs:label>createdAt</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Image"/>
+                    <rdf:Description rdf:about="#Paragraph"/>
+                    <rdf:Description rdf:about="#Section"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#elementInPage -->
+
+    <owl:DatatypeProperty rdf:about="#elementInPage">
+        <rdfs:label>elementInPage</rdfs:label>
+        <rdfs:domain rdf:resource="#DocumentElement"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#fontColor -->
+
+    <owl:DatatypeProperty rdf:about="#fontColor">
+        <rdfs:label>fontColor</rdfs:label>
+        <rdfs:domain rdf:resource="#FontFormat"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#fontSize -->
+
+    <owl:DatatypeProperty rdf:about="#fontSize">
+        <rdfs:label>fontSize</rdfs:label>
+        <rdfs:domain rdf:resource="#FontFormat"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#fontString -->
+
+    <owl:DatatypeProperty rdf:about="#fontString">
+        <rdfs:label>font</rdfs:label>
+        <rdfs:domain rdf:resource="#FontFormat"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#fontType -->
+
+    <owl:DatatypeProperty rdf:about="#fontType">
+        <rdfs:label>fontType</rdfs:label>
+        <rdfs:domain rdf:resource="#FontFormat"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasBeginPage -->
+
+    <owl:DatatypeProperty rdf:about="#hasBeginPage">
+        <rdfs:label>startPage</rdfs:label>
+        <rdfs:domain rdf:resource="#DocumentElement"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasBiography -->
+
+    <owl:DatatypeProperty rdf:about="#hasBiography">
+        <rdfs:label>biography</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasBirthday -->
+
+    <owl:DatatypeProperty rdf:about="#hasBirthday">
+        <rdfs:label>birthday</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasContactEmail -->
+
+    <owl:DatatypeProperty rdf:about="#hasContactEmail">
+        <rdfs:label>contactEmail</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasEndPage -->
+
+    <owl:DatatypeProperty rdf:about="#hasEndPage">
+        <rdfs:label>endPage</rdfs:label>
+        <rdfs:domain rdf:resource="#DocumentElement"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasExtension -->
+
+    <owl:DatatypeProperty rdf:about="#hasExtension">
+        <rdfs:label>extension</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Document"/>
+                    <rdf:Description rdf:about="#Image"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasFullName -->
+
+    <owl:DatatypeProperty rdf:about="#hasFullName">
+        <rdfs:label>fullName</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasISBN -->
+
+    <owl:DatatypeProperty rdf:about="#hasISBN">
+        <rdfs:label>hasISBN</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasKeywords -->
+
+    <owl:DatatypeProperty rdf:about="#hasKeywords">
+        <rdfs:label>keywords</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasLocalURI -->
+
+    <owl:DatatypeProperty rdf:about="#hasLocalURI">
+        <rdfs:label>localURI</rdfs:label>
+        <rdfs:domain rdf:resource="#Link"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasPhoneNumber -->
+
+    <owl:DatatypeProperty rdf:about="#hasPhoneNumber">
+        <rdfs:label>phoneNumber</rdfs:label>
+        <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasPublicationDateTime -->
+
+    <owl:DatatypeProperty rdf:about="#hasPublicationDateTime">
+        <rdfs:label
+            >hasPublicationDateTime</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasTextContent -->
+
+    <owl:DatatypeProperty rdf:about="#hasTextContent">
+        <rdfs:label>hasTextContent</rdfs:label>
+        <rdfs:domain rdf:resource="#DocumentElement"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasURI -->
+
+    <owl:DatatypeProperty rdf:about="#hasURI">
+        <rdfs:label>hasURI</rdfs:label>
+        <rdfs:domain rdf:resource="#Link"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#hasVersion -->
+
+    <owl:DatatypeProperty rdf:about="#hasVersion">
+        <rdfs:label>hasVersion</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#heightOfImage -->
+
+    <owl:DatatypeProperty rdf:about="#heightOfImage">
+        <rdfs:label>height</rdfs:label>
+        <rdfs:domain rdf:resource="#Image"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#isDiscarded -->
+
+    <owl:DatatypeProperty rdf:about="#isDiscarded">
+        <rdfs:domain rdf:resource="#CodeChange"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#levelOfSection -->
+
+    <owl:DatatypeProperty rdf:about="#levelOfSection">
+        <rdfs:domain rdf:resource="#Section"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#numberingPartOfSection -->
+
+    <owl:DatatypeProperty rdf:about="#numberingPartOfSection">
+        <rdfs:label>numbering</rdfs:label>
+        <rdfs:domain rdf:resource="#Section"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#sizeOfDocument -->
+
+    <owl:DatatypeProperty rdf:about="#sizeOfDocument">
+        <rdfs:label>size</rdfs:label>
+        <rdfs:label>sizeUnit</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#totalPagesOfDocument -->
+
+    <owl:DatatypeProperty rdf:about="#totalPagesOfDocument">
+        <rdfs:label>numPages</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#totalReferencesOfDocument -->
+
+    <owl:DatatypeProperty rdf:about="#totalReferencesOfDocument">
+        <rdfs:label>numReferences</rdfs:label>
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#widthOfImage -->
+
+    <owl:DatatypeProperty rdf:about="#widthOfImage">
+        <rdfs:label>width</rdfs:label>
+        <rdfs:domain rdf:resource="#Image"/>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasDescription -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;hasDescription">
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasDirectType -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;hasDirectType">
+        <rdfs:label>hasDirectType</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasFullPath -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;hasFullPath">
+        <rdfs:label>fullPath</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Class"/>
+                    <rdf:Description rdf:about="&sourcecode;Field"/>
+                    <rdf:Description rdf:about="&sourcecode;Interface"/>
+                    <rdf:Description rdf:about="&sourcecode;Method"/>
+                    <rdf:Description rdf:about="&sourcecode;SourceFile"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#hasName -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;hasName">
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#isCoded -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;isCoded">
+        <rdfs:domain rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocAuthor -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocAuthor">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocDescription -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocDescription">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocException -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocException">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocParams -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocParams">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocReturn -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocReturn">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocSee -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocSee">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocSince -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocSince">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#javadocVersion -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;javadocVersion">
+        <rdfs:domain rdf:resource="&sourcecode;Comment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#lastModifiedAt -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;lastModifiedAt">
+        <rdfs:label
+            >last modified at</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >Defines at which date and time a given element was modified.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Layer"/>
+                    <rdf:Description rdf:about="&sourcecode;Metric"/>
+                    <rdf:Description rdf:about="&sourcecode;Requirement"/>
+                    <rdf:Description rdf:about="&sourcecode;SoftwareComponent"/>
+                    <rdf:Description rdf:about="&sourcecode;Test"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#lastValidatedAt -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;lastValidatedAt">
+        <rdfs:label
+            >last validated at</rdfs:label>
+        <rdfs:comment
+            >Defines at which date and time a given Requirement was validated by a person.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfAbstractClass -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfAbstractClass">
+        <rdfs:label
+            >numAbstractClass</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;PackageMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfAttributes -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfAttributes">
+        <rdfs:label>numAttributes</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;ClassMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfClasses -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfClasses">
+        <rdfs:label>numClasses</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;Package"/>
+                    <rdf:Description rdf:about="&sourcecode;PackageMetric"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfGetters -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfGetters">
+        <rdfs:label>numGetters</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;ClassMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfInterfaces -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfInterfaces">
+        <rdfs:label>numInterfaces</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&sourcecode;ClassMetric"/>
+                    <rdf:Description rdf:about="&sourcecode;PackageMetric"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfMethods -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfMethods">
+        <rdfs:label>numMethods</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;ClassMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfPublicMethods -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfPublicMethods">
+        <rdfs:label
+            >numPublicMethods</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;ClassMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfRelatedPackage -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfRelatedPackage">
+        <rdfs:label
+            >numRelatedPackage</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;PackageMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#mectricNumberOfSetters -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;mectricNumberOfSetters">
+        <rdfs:label>numSetters</rdfs:label>
+        <rdfs:domain rdf:resource="&sourcecode;ClassMetric"/>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#metricCalculatedAt -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;metricCalculatedAt">
+        <rdfs:label
+            >metric calculated at</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a Metric and the date-time at which it was calculated.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Metric"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#requirementEndDate -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;requirementEndDate">
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#requirementIsInstalled -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;requirementIsInstalled">
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#requirementStartDate -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;requirementStartDate">
+        <rdfs:domain rdf:resource="&sourcecode;Requirement"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#testExecuteAt -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;testExecuteAt">
+        <rdfs:label>tested at</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a Test and the date-time at which the test was concluded.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Test"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#testIsSuccessful -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;testIsSuccessful">
+        <rdfs:domain rdf:resource="&sourcecode;Test"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#testSucceedAt -->
+
+    <owl:DatatypeProperty rdf:about="&sourcecode;testSucceedAt">
+        <rdfs:label>succeeded</rdfs:label>
+        <rdfs:comment
+            >Defines the relationship between a Test and a Boolen indicating whether the Test passed or failed.</rdfs:comment>
+        <rdfs:domain rdf:resource="&sourcecode;Test"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Agent -->
+
+    <owl:Class rdf:about="#Agent">
+        <rdfs:label>Agent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#AlgorithmTopic -->
+
+    <owl:Class rdf:about="#AlgorithmTopic">
+        <rdfs:subClassOf rdf:resource="#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Annotation -->
+
+    <owl:Class rdf:about="#Annotation">
+        <rdfs:label>Annotation</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ArchitectureDocument -->
+
+    <owl:Class rdf:about="#ArchitectureDocument">
+        <rdfs:label
+            >ArchitectureDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DesignDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ArrangeTopic -->
+
+    <owl:Class rdf:about="#ArrangeTopic">
+        <rdfs:subClassOf rdf:resource="#AlgorithmTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Book -->
+
+    <owl:Class rdf:about="#Book">
+        <rdfs:label>Book</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Bookmark -->
+
+    <owl:Class rdf:about="#Bookmark">
+        <rdfs:label>Bookmark</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#CSharpTopic -->
+
+    <owl:Class rdf:about="#CSharpTopic">
+        <rdfs:subClassOf rdf:resource="#DotNetTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Caption -->
+
+    <owl:Class rdf:about="#Caption">
+        <rdfs:label>Caption</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#CodeChange -->
+
+    <owl:Class rdf:about="#CodeChange">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Company -->
+
+    <owl:Class rdf:about="#Company">
+        <rdfs:subClassOf rdf:resource="#Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ConfigurationDocument -->
+
+    <owl:Class rdf:about="#ConfigurationDocument">
+        <rdfs:label
+            >ConfigurationDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#SystemDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DataBaseTopic -->
+
+    <owl:Class rdf:about="#DataBaseTopic">
+        <rdfs:subClassOf rdf:resource="#SystemDevelopmentTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DesignDocument -->
+
+    <owl:Class rdf:about="#DesignDocument">
+        <rdfs:label>DesignDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DesignInterfaceTopic -->
+
+    <owl:Class rdf:about="#DesignInterfaceTopic">
+        <rdfs:subClassOf rdf:resource="#SystemDevelopmentTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Designer -->
+
+    <owl:Class rdf:about="#Designer">
+        <rdfs:subClassOf rdf:resource="#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DesignerTeam -->
+
+    <owl:Class rdf:about="#DesignerTeam">
+        <rdfs:subClassOf rdf:resource="#Group"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Developer -->
+
+    <owl:Class rdf:about="#Developer">
+        <rdfs:subClassOf rdf:resource="#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DeveloperTeam -->
+
+    <owl:Class rdf:about="#DeveloperTeam">
+        <rdfs:subClassOf rdf:resource="#Group"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DistributedSystemTopic -->
+
+    <owl:Class rdf:about="#DistributedSystemTopic">
+        <rdfs:subClassOf rdf:resource="#TechnologyTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Document -->
+
+    <owl:Class rdf:about="#Document">
+        <rdfs:label>Document</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DocumentElement -->
+
+    <owl:Class rdf:about="#DocumentElement">
+        <rdfs:label>DocumentElement</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DotNetTopic -->
+
+    <owl:Class rdf:about="#DotNetTopic">
+        <rdfs:subClassOf rdf:resource="#ProgrammingTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#FontFormat -->
+
+    <owl:Class rdf:about="#FontFormat">
+        <rdfs:label>Format</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#FootNote -->
+
+    <owl:Class rdf:about="#FootNote">
+        <rdfs:label>FootNote</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Footer -->
+
+    <owl:Class rdf:about="#Footer">
+        <rdfs:label>Footer</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#FunctionalDescription -->
+
+    <owl:Class rdf:about="#FunctionalDescription">
+        <rdfs:label
+            >FunctionalDescription</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#GraphTopic -->
+
+    <owl:Class rdf:about="#GraphTopic">
+        <rdfs:subClassOf rdf:resource="#AlgorithmTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Group -->
+
+    <owl:Class rdf:about="#Group">
+        <rdfs:label>Group</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Header -->
+
+    <owl:Class rdf:about="#Header">
+        <rdfs:label>Header</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Image -->
+
+    <owl:Class rdf:about="#Image">
+        <rdfs:label>Image</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ImplementationDocument -->
+
+    <owl:Class rdf:about="#ImplementationDocument">
+        <rdfs:label
+            >ImplementationDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DesignDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ImprovePerformanceTopic -->
+
+    <owl:Class rdf:about="#ImprovePerformanceTopic">
+        <rdfs:subClassOf rdf:resource="#SystemDevelopmentTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Index -->
+
+    <owl:Class rdf:about="#Index">
+        <rdfs:label>Index</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#InstalationManual -->
+
+    <owl:Class rdf:about="#InstalationManual">
+        <rdfs:label
+            >InstalationManual</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#IntroductionDocument -->
+
+    <owl:Class rdf:about="#IntroductionDocument">
+        <rdfs:label
+            >IntroductoryManual</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#JavaDocDocument -->
+
+    <owl:Class rdf:about="#JavaDocDocument">
+        <rdfs:label>JavaDocDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DesignDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#JavaTopic -->
+
+    <owl:Class rdf:about="#JavaTopic">
+        <rdfs:subClassOf rdf:resource="#ProgrammingTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Link -->
+
+    <owl:Class rdf:about="#Link">
+        <rdfs:label>Link</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Marker -->
+
+    <owl:Class rdf:about="#Marker">
+        <rdfs:label>Marker</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Milestone -->
+
+    <owl:Class rdf:about="#Milestone">
+        <rdfs:label>Milestone</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ProcessDocument"/>
+        <rdfs:comment
+            >Representation a stage of the project during software developing process</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Note -->
+
+    <owl:Class rdf:about="#Note">
+        <rdfs:label>Note</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Annotation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Organization -->
+
+    <owl:Class rdf:about="#Organization">
+        <rdfs:label>Organization</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#OtherTopic -->
+
+    <owl:Class rdf:about="#OtherTopic">
+        <rdfs:subClassOf rdf:resource="#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Paragraph -->
+
+    <owl:Class rdf:about="#Paragraph">
+        <rdfs:label>Paragraph</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Person -->
+
+    <owl:Class rdf:about="#Person">
+        <rdfs:label>Person</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ProcessDocument -->
+
+    <owl:Class rdf:about="#ProcessDocument">
+        <rdfs:label>ProcessDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ProgrammingTopic -->
+
+    <owl:Class rdf:about="#ProgrammingTopic">
+        <rdfs:subClassOf rdf:resource="#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ProjectManager -->
+
+    <owl:Class rdf:about="#ProjectManager">
+        <rdfs:subClassOf rdf:resource="#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ProjectTeam -->
+
+    <owl:Class rdf:about="#ProjectTeam">
+        <rdfs:subClassOf rdf:resource="#Group"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ReferenceManual -->
+
+    <owl:Class rdf:about="#ReferenceManual">
+        <rdfs:label>ReferenceManual</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Report -->
+
+    <owl:Class rdf:about="#Report">
+        <rdfs:label>Report</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#ProcessDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#RequirementDocument -->
+
+    <owl:Class rdf:about="#RequirementDocument">
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Section -->
+
+    <owl:Class rdf:about="#Section">
+        <rdfs:label>Section</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SemanticWebTopic -->
+
+    <owl:Class rdf:about="#SemanticWebTopic">
+        <rdfs:subClassOf rdf:resource="#TechnologyTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Sentence -->
+
+    <owl:Class rdf:about="#Sentence">
+        <rdfs:label>Sentence</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#DocumentElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SystemAdministratorManual -->
+
+    <owl:Class rdf:about="#SystemAdministratorManual">
+        <rdfs:label
+            >SystemAdministratorManual</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SystemDevelopmentTopic -->
+
+    <owl:Class rdf:about="#SystemDevelopmentTopic">
+        <rdfs:subClassOf rdf:resource="#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SystemDocument -->
+
+    <owl:Class rdf:about="#SystemDocument">
+        <rdfs:label>SystemDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#TeamLeader -->
+
+    <owl:Class rdf:about="#TeamLeader">
+        <rdfs:subClassOf rdf:resource="#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#TechnologyTopic -->
+
+    <owl:Class rdf:about="#TechnologyTopic">
+        <rdfs:subClassOf rdf:resource="#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Tester -->
+
+    <owl:Class rdf:about="#Tester">
+        <rdfs:subClassOf rdf:resource="#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#TesterTeam -->
+
+    <owl:Class rdf:about="#TesterTeam">
+        <rdfs:subClassOf rdf:resource="#Group"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Topic -->
+
+    <owl:Class rdf:about="#Topic">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#UserDocument -->
+
+    <owl:Class rdf:about="#UserDocument">
+        <rdfs:label>UserDocument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#UserGuide -->
+
+    <owl:Class rdf:about="#UserGuide">
+        <rdfs:label>UsesGuide</rdfs:label>
+        <rdfs:subClassOf rdf:resource="#UserDocument"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#VisualBasicTopic -->
+
+    <owl:Class rdf:about="#VisualBasicTopic">
+        <rdfs:subClassOf rdf:resource="#DotNetTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#WebServiceTopic -->
+
+    <owl:Class rdf:about="#WebServiceTopic">
+        <rdfs:subClassOf rdf:resource="#DistributedSystemTopic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#AbstractClass -->
+
+    <owl:Class rdf:about="&sourcecode;AbstractClass">
+        <rdfs:label xml:lang="en">Abstract Class</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Class"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasMethodSignature"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;MethodSignature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented Abstract Class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Class -->
+
+    <owl:Class rdf:about="&sourcecode;Class">
+        <rdfs:label xml:lang="en">Class</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;extendsClass"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Class"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;classIsExtendedBy"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Class"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasMethod"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Method"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;implementsInterface"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Interface"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented Class</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#ClassMetric -->
+
+    <owl:Class rdf:about="&sourcecode;ClassMetric">
+        <rdfs:label>ClassMetric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Metric"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Comment -->
+
+    <owl:Class rdf:about="&sourcecode;Comment">
+        <rdfs:label>Comment</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Constructor -->
+
+    <owl:Class rdf:about="&sourcecode;Constructor">
+        <rdfs:label>Constructor</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >Representation of a object-oriented constructor within an OO class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Field -->
+
+    <owl:Class rdf:about="&sourcecode;Field">
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#FolderSourceCode -->
+
+    <owl:Class rdf:about="&sourcecode;FolderSourceCode">
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#IntegrationTest -->
+
+    <owl:Class rdf:about="&sourcecode;IntegrationTest">
+        <rdfs:label
+            >Integration Test</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Test"/>
+        <rdfs:comment
+            >An integration test of a software subsystem.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Interface -->
+
+    <owl:Class rdf:about="&sourcecode;Interface">
+        <rdfs:label xml:lang="en">Interface</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasMethodSignature"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;MethodSignature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented Interface.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#JavaModifier -->
+
+    <owl:Class rdf:about="&sourcecode;JavaModifier">
+        <rdfs:label>JavaModifier</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#JavaPrimaryType -->
+
+    <owl:Class rdf:about="&sourcecode;JavaPrimaryType">
+        <rdfs:label>JavaPrimaryType</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Layer -->
+
+    <owl:Class rdf:about="&sourcecode;Layer">
+        <rdfs:label>Layer</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#LayerMetric -->
+
+    <owl:Class rdf:about="&sourcecode;LayerMetric">
+        <rdfs:label>LayerMetric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Metric"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Library -->
+
+    <owl:Class rdf:about="&sourcecode;Library">
+        <rdfs:label>Library</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >Representation a library (jar) file</rdfs:comment>
+        <rdfs:comment
+            >Representation a library (jar)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Method -->
+
+    <owl:Class rdf:about="&sourcecode;Method">
+        <rdfs:label xml:lang="en">Method</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;usesMethod"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Method"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasTest"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;UnitTest"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented Method.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#MethodMetric -->
+
+    <owl:Class rdf:about="&sourcecode;MethodMetric">
+        <rdfs:label>MethodMetric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Metric"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#MethodSignature -->
+
+    <owl:Class rdf:about="&sourcecode;MethodSignature">
+        <rdfs:label
+            >Method Signature</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >An Object-Oriented Method Signature.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Metric -->
+
+    <owl:Class rdf:about="&sourcecode;Metric">
+        <rdfs:label>Metric</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;isMetricOf"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;SoftwareComponent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An automatically generated metric about a software component.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Package -->
+
+    <owl:Class rdf:about="&sourcecode;Package">
+        <rdfs:label>Package</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasTest"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;IntegrationTest"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented package of classes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#PackageMetric -->
+
+    <owl:Class rdf:about="&sourcecode;PackageMetric">
+        <rdfs:label>PackageMetric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Metric"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Parameter -->
+
+    <owl:Class rdf:about="&sourcecode;Parameter">
+        <rdfs:label>Parameter</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >Parameter of a function, constructor..</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Project -->
+
+    <owl:Class rdf:about="&sourcecode;Project">
+        <rdfs:label>Project</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasPackage"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Package"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An Object-Oriented software Project.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#ProjectMetric -->
+
+    <owl:Class rdf:about="&sourcecode;ProjectMetric">
+        <rdfs:label>ProjectMetric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Metric"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#ReferenceParameter -->
+
+    <owl:Class rdf:about="&sourcecode;ReferenceParameter">
+        <rdfs:label
+            >ReferenceParameter</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Requirement -->
+
+    <owl:Class rdf:about="&sourcecode;Requirement">
+        <rdfs:label xml:lang="en">Requirement</rdfs:label>
+        <rdfs:comment
+            >A requirement for a software system.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Resource -->
+
+    <owl:Class rdf:about="&sourcecode;Resource">
+        <rdfs:label>Resource</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >Representation a resource in a project. For example, a image or a text file is resource</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#SoftwareComponent -->
+
+    <owl:Class rdf:about="&sourcecode;SoftwareComponent">
+        <rdfs:label
+            >Software Component</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasTest"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Test"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;hasMetric"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;Metric"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >A Object-Oriented software component.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#SourceFile -->
+
+    <owl:Class rdf:about="&sourcecode;SourceFile">
+        <rdfs:label>SourceFile</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Test -->
+
+    <owl:Class rdf:about="&sourcecode;Test">
+        <rdfs:label>Test</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&sourcecode;isTestOf"/>
+                <owl:allValuesFrom rdf:resource="&sourcecode;SoftwareComponent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >An automated test of a software component.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Type -->
+
+    <owl:Class rdf:about="&sourcecode;Type">
+        <rdfs:label xml:lang="en">Type</rdfs:label>
+        <rdfs:comment xml:lang="en">Define a type</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#UnitTest -->
+
+    <owl:Class rdf:about="&sourcecode;UnitTest">
+        <rdfs:label>Unit Test</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Test"/>
+        <rdfs:comment
+            >A unit test of a software component.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#ValueParameter -->
+
+    <owl:Class rdf:about="&sourcecode;ValueParameter">
+        <rdfs:label>ValueParameter</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Variable -->
+
+    <owl:Class rdf:about="&sourcecode;Variable">
+        <rdfs:label>Variable</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+        <rdfs:comment
+            >Representation a variable within a method, a class or a interface</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Workspace -->
+
+    <owl:Class rdf:about="&sourcecode;Workspace">
+        <rdfs:label>Workspace</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&sourcecode;SoftwareComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#AlgorithmTopic_Instance -->
+
+    <AlgorithmTopic rdf:about="#AlgorithmTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ArrangeTopic_Instance -->
+
+    <ArrangeTopic rdf:about="#ArrangeTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#CSharpTopic_Instance -->
+
+    <CSharpTopic rdf:about="#CSharpTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DataBaseTopic_Instance -->
+
+    <DataBaseTopic rdf:about="#DataBaseTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DesignInterfaceTopic_Instance -->
+
+    <DesignInterfaceTopic rdf:about="#DesignInterfaceTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DistributedSystemTopic_Instance -->
+
+    <DistributedSystemTopic rdf:about="#DistributedSystemTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#DotNetTopic_Instance -->
+
+    <DotNetTopic rdf:about="#DotNetTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#GraphTopic_Instance -->
+
+    <GraphTopic rdf:about="#GraphTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ImprovePerformanceTopic_Instance -->
+
+    <ImprovePerformanceTopic rdf:about="#ImprovePerformanceTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#JavaTopic_Instance -->
+
+    <JavaTopic rdf:about="#JavaTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#OtherTopic_Instance -->
+
+    <OtherTopic rdf:about="#OtherTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#ProgrammingTopic_Instance -->
+
+    <ProgrammingTopic rdf:about="#ProgrammingTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SemanticWebTopic_Instance -->
+
+    <SemanticWebTopic rdf:about="#SemanticWebTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#SystemDevelopmentTopic_Instance -->
+
+    <SystemDevelopmentTopic rdf:about="#SystemDevelopmentTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#TechnologyTopic_Instance -->
+
+    <TechnologyTopic rdf:about="#TechnologyTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#Topic_Instance -->
+
+    <Topic rdf:about="#Topic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#VisualBasicTopic_Instance -->
+
+    <VisualBasicTopic rdf:about="#VisualBasicTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/document#WebServiceTopic_Instance -->
+
+    <WebServiceTopic rdf:about="#WebServiceTopic_Instance"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Abstract -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Abstract">
+        <rdfs:label>Abstract</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: abstract modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Boolean -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;Boolean">
+        <rdfs:label>boolean</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Final -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Final">
+        <rdfs:label>Final</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: final modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#List -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;List"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Native -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Native">
+        <rdfs:label>Native</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: native modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Private -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Private">
+        <rdfs:label>Private</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: private modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Protected -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Protected">
+        <rdfs:label>Protected</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: protected modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Public -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Public">
+        <rdfs:label>Public</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: public modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Static -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Static">
+        <rdfs:label>Static</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: static modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#String -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;String"/>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Synchronized -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Synchronized">
+        <rdfs:label>Synchronized</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: synchronized modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Threadsafe -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Threadsafe">
+        <rdfs:label>Threadsafe</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: threadsafe modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Transient -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Transient">
+        <rdfs:label>Transient</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: transient modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#Volatile -->
+
+    <sourcecode:JavaModifier rdf:about="&sourcecode;Volatile">
+        <rdfs:label>Volatile</rdfs:label>
+        <rdfs:comment
+            >Represenation a individual of modifier class: volatile modifier</rdfs:comment>
+    </sourcecode:JavaModifier>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#array -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;array">
+        <rdfs:label>array</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#byte -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;byte">
+        <rdfs:label>byte</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#char -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;char">
+        <rdfs:label>char</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#double -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;double">
+        <rdfs:label>double</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#float -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;float">
+        <rdfs:label>float</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#int -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;int">
+        <rdfs:label>int</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#long -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;long">
+        <rdfs:label>long</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#short -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;short">
+        <rdfs:label>short</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+    
+
+
+    <!-- http://hut.edu.vn/ontology/sourcecode#void -->
+
+    <sourcecode:JavaPrimaryType rdf:about="&sourcecode;void">
+        <rdfs:label>void</rdfs:label>
+    </sourcecode:JavaPrimaryType>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,6 @@
+1. Doi baseuri, entity cua rule
+2. Dat ten rule phai khac nhau
+3. uri cua class, thuoc tinh phai dung
+4. Ten class, thuoc tinh (Class chu hoa, thuoc tinh chu thuong)
+5. Hay nham ten bien cop vao ten class
+6. Ten bien go khong thong nhat

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY swrl  "http://www.w3.org/2003/11/swrl#" >
+  <!ENTITY rule5 "http://www.hut.edu.vn/ontology/rule5#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">  
+  <!ENTITY sourcecode "http://hut.edu.vn/ontology/sourcecode#" >
+  <!ENTITY document "http://hut.edu.vn/ontology/document#" >
+  <!ENTITY ruleml  "http://www.w3.org/2003/11/ruleml#" >
+]>
+<rdf:RDF xml:base="http://www.hut.edu.vn/ontology/rule5#" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:swrl="http://www.w3.org/2003/11/swrl#" 
+		xmlns:ruleml="http://www.w3.org/2003/11/ruleml#">
+
+	
+	
+	<swrl:Variable rdf:about="#softwareComponent"/>
+	<swrl:Variable rdf:about="#requirement"/>
+	<swrl:Variable rdf:about="#document"/>
+	<swrl:Variable rdf:about="#documentElement"/>
+
+	<!-- Neu requirement mo ta trong documentElement, requirement cai dat trong code thi code lien quan toi documentElement-->
+	<swrl:Imp rdf:about="#requirementDocElementInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#docRelatedToCode"/>
+				<swrl:argument1 rdf:resource="#documentElement"/>
+				<swrl:argument2 rdf:resource="#softwareComponent"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#DocumentElement"/>
+				<swrl:argument1 rdf:resource="#documentElement"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Requirement"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#SoftwareComponent"/>
+				<swrl:argument1 rdf:resource="#softwareComponent"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#requirementDescribedInDoc"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+				<swrl:argument2 rdf:resource="#documentElement"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#requirementInstalledInCode"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+				<swrl:argument2 rdf:resource="#softwareComponent"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+	<!-- Neu requirement mo ta trong document, requirement cai dat trong code thi code lien quan toi document-->
+	<swrl:Imp rdf:about="#requirementDocInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#docRelatedToCode"/>
+				<swrl:argument1 rdf:resource="#document"/>
+				<swrl:argument2 rdf:resource="#softwareComponent"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Document"/>
+				<swrl:argument1 rdf:resource="#document"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#Requirement"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#SoftwareComponent"/>
+				<swrl:argument1 rdf:resource="#softwareComponent"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#requirementDescribedInDoc"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+				<swrl:argument2 rdf:resource="#document"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/sourcecode#requirementInstalledInCode"/>
+				<swrl:argument1 rdf:resource="#requirement"/>
+				<swrl:argument2 rdf:resource="#softwareComponent"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+</rdf:RDF>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY swrl  "http://www.w3.org/2003/11/swrl#" >
+  <!ENTITY rule1 "http://www.hut.edu.vn/ontology/rule1#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">  
+  <!ENTITY sourcecode "http://hut.edu.vn/ontology/sourcecode#" >
+  <!ENTITY document "http://hut.edu.vn/ontology/document#" >
+  <!ENTITY ruleml  "http://www.w3.org/2003/11/ruleml#" >
+]>
+<rdf:RDF xml:base="http://www.hut.edu.vn/ontology/rule1#" 
+		xmlns:owl="http://www.w3.org/2002/07/owl#" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+		xmlns:swrl="http://www.w3.org/2003/11/swrl#" 
+		xmlns:ruleml="http://www.w3.org/2003/11/ruleml#">
+
+	
+	<!-- Neu sectionParent co section la sectionChildren, sectionChildren co paragraph la paragraph thi sectionParent cung co paragraph la paragraph-->
+	<!-- Tuong tu voi image-->
+
+	<swrl:Variable rdf:about="#sectionParent"/>
+	<swrl:Variable rdf:about="#sectionChildren"/>
+	<swrl:Variable rdf:about="#paragraph"/>
+	<swrl:Variable rdf:about="#image"/>
+	<swrl:Variable rdf:about="#document"/>
+	<swrl:Variable rdf:about="#documentElement"/>
+	<swrl:Imp rdf:about="#paragraphInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasParagraph"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+				<swrl:argument2 rdf:resource="#paragraph"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Section"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Section"/>
+				<swrl:argument1 rdf:resource="#sectionChildren"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Paragraph"/>
+				<swrl:argument1 rdf:resource="#paragraph"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasSection"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+				<swrl:argument2 rdf:resource="#sectionChildren"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasParagraph"/>
+				<swrl:argument1 rdf:resource="#sectionChildren"/>
+				<swrl:argument2 rdf:resource="#paragraph"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+
+	<!-- Tuong tu voi image-->
+	<swrl:Imp rdf:about="#imageInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasImage"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+				<swrl:argument2 rdf:resource="#image"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Section"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Section"/>
+				<swrl:argument1 rdf:resource="#sectionChildren"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Image"/>
+				<swrl:argument1 rdf:resource="#image"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasSection"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+				<swrl:argument2 rdf:resource="#sectionChildren"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasImage"/>
+				<swrl:argument1 rdf:resource="#sectionChildren"/>
+				<swrl:argument2 rdf:resource="#image"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+	<!-- document co section, section co elementdocument thi documetn cung co elementdocument-->
+	<swrl:Imp rdf:about="#documentInfer">
+		<swrl:head rdf:parseType="Collection">
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasDocumentElement"/>
+				<swrl:argument1 rdf:resource="#document"/>
+				<swrl:argument2 rdf:resource="#documentElement"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:head>
+
+		<swrl:body rdf:parseType="Collection">
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Section"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#Document"/>
+				<swrl:argument1 rdf:resource="#document"/>
+			</swrl:ClassAtom>
+			<swrl:ClassAtom>
+				<swrl:classPredicate rdf:resource="http://hut.edu.vn/ontology/document#DocumentElement"/>
+				<swrl:argument1 rdf:resource="#documentElement"/>
+			</swrl:ClassAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasDocumentElement"/>
+				<swrl:argument1 rdf:resource="#sectionParent"/>
+				<swrl:argument2 rdf:resource="#documentElement"/>
+			</swrl:IndividualPropertyAtom>
+
+			<swrl:IndividualPropertyAtom>
+				<swrl:propertyPredicate rdf:resource="http://hut.edu.vn/ontology/document#hasSection"/>
+				<swrl:argument1 rdf:resource="#document"/>
+				<swrl:argument2 rdf:resource="#sectionParent"/>
+			</swrl:IndividualPropertyAtom>
+		</swrl:body>
+	</swrl:Imp>
+
+</rdf:RDF>
